@@ -10,41 +10,35 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    var avatarView: UIImageView!
-    var userTextInfo: UIView!
-    var userName: UILabel!
-    var userStatus: UILabel!
-    var button: UIButton!
-    var newStatus: UITextField!
-    private var statusText: String = " "
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        avatarView = UIImageView(frame: CGRect(x: 0, y: 16, width: 110, height: 110))
-        avatarView.backgroundColor = .white
-        avatarView.layer.borderColor = UIColor.white.cgColor
-        avatarView.layer.borderWidth = 3.0
-        avatarView.layer.cornerRadius = avatarView.frame.size.width / 2
-        avatarView.clipsToBounds = true
-        self.addSubview(avatarView)
-        
-        userTextInfo = UIView()
-        self.addSubview(userTextInfo)
-        
-        userName = UILabel()
+    var avatarView: UIImageView {
+        let avatar = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
+        avatar.backgroundColor = .white
+        avatar.image = UIImage(named: "cat")!
+        avatar.layer.borderColor = UIColor.white.cgColor
+        avatar.layer.borderWidth = 3.0
+        avatar.layer.cornerRadius = avatar.frame.size.width / 2
+        avatar.clipsToBounds = true
+        return avatar
+    }
+
+    var userName = UILabel() {
+        let userName = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
         userName.textColor = .black
         userName.font = UIFont.boldSystemFont(ofSize: 18.0)
         userName.text = "Default user name"
-        userTextInfo.addSubview(userName)
-        
-        userStatus = UILabel()
+        return userName
+    }()
+
+    var userStatus: UILabel {
+        let userStatus = UILabel()
         userStatus.textColor = .gray
         userStatus.font = UIFont.systemFont(ofSize: 14.0)
         userStatus.text = "Default user status"
-        userTextInfo.addSubview(userStatus)
-        
-        button = UIButton()
+        return userStatus
+    }
+
+    var button: UIButton {
+        let button = UIButton()
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12
         button.setTitle("Set status", for: .normal)
@@ -54,9 +48,11 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        self.addSubview(button)
-        
-        newStatus = UITextField()
+        return button
+    }
+
+    var newStatus: UITextField {
+        let newStatus = UITextField()
         newStatus.backgroundColor = .white
         newStatus.layer.cornerRadius = 12
         newStatus.layer.borderColor = UIColor.black.cgColor
@@ -66,8 +62,32 @@ class ProfileHeaderView: UIView {
         newStatus.setLeftPaddingPoints(10)
         newStatus.setRightPaddingPoints(10)
         newStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        userTextInfo.addSubview(newStatus)
+        return newStatus
+    }
+
+    private var statusText: String = " "
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.addSubview(avatarView)
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(userName)
+        userName.translatesAutoresizingMaskIntoConstraints = false
+        userName.leftAnchor.constraint(equalTo: avatarView.rightAnchor, constant: 16).isActive = true
         
+
+        self.addSubview(userStatus)
+        userStatus.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(newStatus)
+        newStatus.translatesAutoresizingMaskIntoConstraints = false
+
+
     }
     
     required init?(coder aDecoder: NSCoder) {
