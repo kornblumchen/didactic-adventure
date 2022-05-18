@@ -8,113 +8,43 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+
+    lazy var userProfileView: ProfileHeaderView = {
+        let userProfileView = ProfileHeaderView()
+        return userProfileView
+    }()
+
+    private lazy var newButton: UIButton = {
+        let button = UIButton()
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.cornerRadius = 12
+        button.setTitle("New button", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray3
 
-        
         view.addSubview(userProfileView)
         userProfileView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(newButton)
+        newButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             userProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             userProfileView.heightAnchor.constraint(equalToConstant: 220),
             userProfileView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16),
-            userProfileView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16)
+            userProfileView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+
+            newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            newButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-
-
-
     }
-
-    lazy var userProfileView: ProfileHeaderView = {
-        let userProfileView = ProfileHeaderView()
-        userProfileView.backgroundColor = .green
-
-
-
-
-
-      // userProfileView.avatarView.image = UIImage(named: "cat")!
-        //userProfileView.userName.text = "Fluffy cat"
-        //userProfileView.userStatus.text = "Waiting for something"
-
-//        NSLayoutConstraint.activate([
-//            userProfileView.userName.heightAnchor.constraint(equalToConstant: 220),
-//            userProfileView.userName.widthAnchor.constraint(equalToConstant: 220),
-//        ])
-
-        return userProfileView
-    }()
-
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        //setupView()
-//
-//
-//
-//        userProfileView.frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: view.frame.width,
-//            height: view.frame.height);
-
-//        userProfileView.userTextInfo.frame = CGRect(
-//            x: userProfileView.avatarView.frame.size.width + 16,
-//            y: 27,
-//            width: userProfileView.frame.size.width - userProfileView.avatarView.frame.size.width - 48,
-//            height: 120)
-
-//        userProfileView.userName.frame = CGRect(
-//            x: 0,
-//            y: 0,
-//            width: userProfileView.userTextInfo.frame.size.width,
-//            height: 20)
-
-//        userProfileView.userStatus.frame = CGRect(
-//            x: 0,
-//            y: userProfileView.userName.frame.size.height + 40,
-//            width: userProfileView.userTextInfo.frame.size.width,
-//            height: 16)
-
-//        userProfileView.button.frame = CGRect(
-//            x: 0,
-//            y: userProfileView.avatarView.frame.size.height + 56,
-//            width: userProfileView.frame.size.width - 32,
-//            height: 50)
-
-//        userProfileView.newStatus.frame = CGRect(
-//            x: 0,
-//            y: userProfileView.userName.frame.size.height + 44 + userProfileView.userStatus.frame.size.height,
-//            width: userProfileView.userTextInfo.frame.size.width,
-//            height: 40)
-
-//    }
-
-//    private func setupView() {
-//        userProfileView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(userProfileView)
-//
-//        let margins = view.layoutMarginsGuide
-//        NSLayoutConstraint.activate([
-//            userProfileView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-//            userProfileView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-//        ])
-//
-//        if #available(iOS 11, *) {
-//            let guide = view.safeAreaLayoutGuide
-//            NSLayoutConstraint.activate([
-//                userProfileView.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-//                guide.bottomAnchor.constraint(equalToSystemSpacingBelow: userProfileView.bottomAnchor, multiplier: 1.0)
-//            ])
-//        } else {
-//            let standardSpacing: CGFloat = 8.0
-//            NSLayoutConstraint.activate([
-//                userProfileView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
-//                bottomLayoutGuide.topAnchor.constraint(equalTo: userProfileView.bottomAnchor, constant: standardSpacing)
-//            ])
-//        }
-//    }
 
 }
